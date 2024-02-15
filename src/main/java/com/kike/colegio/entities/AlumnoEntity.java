@@ -2,6 +2,9 @@ package com.kike.colegio.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,38 +38,8 @@ public class AlumnoEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="id_municipio")
+	@JsonBackReference
 	private MunicipiosEntity municipio;
-	
-	@OneToMany(mappedBy = "alumno")
-	Set<MatriculacionEntity> matriculaciones;
-	
-	@OneToMany(mappedBy = "alumno")
-	Set<FaltasEntity> faltas;
-	
-	
-	public AlumnoEntity() {
-		super();
-	}
-	
-	public AlumnoEntity(Integer id) {
-		super();
-		this.id = id;
-	}
-
-	
-	
-	public AlumnoEntity(Integer id, String nombre, String apellidos, Integer famNumerosa, Integer activo,
-			MunicipiosEntity municipio, Set<MatriculacionEntity> matriculaciones, Set<FaltasEntity> faltas) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.famNumerosa = famNumerosa;
-		this.activo = activo;
-		this.municipio = municipio;
-		this.matriculaciones = matriculaciones;
-		this.faltas = faltas;
-	}
 
 	public AlumnoEntity(Integer id, String nombre, String apellidos, Integer famNumerosa, Integer activo,
 			MunicipiosEntity municipio) {
@@ -77,6 +50,10 @@ public class AlumnoEntity {
 		this.famNumerosa = famNumerosa;
 		this.activo = activo;
 		this.municipio = municipio;
+	}
+
+	public AlumnoEntity() {
+		super();
 	}
 
 	public Integer getId() {
@@ -126,9 +103,6 @@ public class AlumnoEntity {
 	public void setMunicipio(MunicipiosEntity municipio) {
 		this.municipio = municipio;
 	}
-
-	
-	
 	
 	
 	
